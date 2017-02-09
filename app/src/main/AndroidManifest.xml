@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home.Activity.HomeActivity">
+        <activity android:name=".User.Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".User.Activity.SignUpActivity" />
-        <activity android:name=".User.Activity.LoginActivity" />
+        <activity android:name=".Home.Activity.HomeActivity" />
         <activity android:name=".Event.Activity.EventListActivity" />
         <activity android:name=".Event.Activity.EventAddActivity"></activity>
     </application>
