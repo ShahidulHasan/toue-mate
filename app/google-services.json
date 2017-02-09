@@ -1,0 +1,45 @@
+{
+  "project_info": {
+    "project_number": "588549452802",
+    "firebase_url": "https://tour-mate-4805d.firebaseio.com",
+    "project_id": "tour-mate-4805d",
+    "storage_bucket": "tour-mate-4805d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588549452802:android:386d281d3ef7f370",
+        "android_client_info": {
+          "package_name": "com.gmail.shahidul.er.tourmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588549452802-c21pk9t66tr0lovtd36ljnvnoe9pjlog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlsEl9X-WEVXP_6h9Zw1tBr0rGO7eQZPA"
+        },
+        {
+          "current_key": "AIzaSyDYY0-U80ZAwSHDB3R5YP_o8LDt4_TN5R4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

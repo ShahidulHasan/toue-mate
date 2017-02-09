@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.gmail.shahidul.er.tourmate.Home.Activity.HomeActivity">
+
+    <Button
+        android:id="@+id/saleList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="#ea4c88"
+        android:onClick="event"
+        android:text="Event"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/productSale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#ea4c88"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/productList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#ea4c88"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/userList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#ea4c88"
+        android:text="My Profile"
+        android:textColor="#ffffff" />
+
+</LinearLayout>
