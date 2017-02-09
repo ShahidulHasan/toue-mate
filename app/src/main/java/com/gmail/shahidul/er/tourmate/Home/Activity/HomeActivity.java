@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.gmail.shahidul.er.tourmate.BaseActivity;
 import com.gmail.shahidul.er.tourmate.Event.Activity.EventListActivity;
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
 import com.gmail.shahidul.er.tourmate.R;
@@ -16,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     private DatabaseReference mDatabase;
     ArrayList<Event> eventArrayList = new ArrayList<>();

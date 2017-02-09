@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:title="Home"
+        android:id="@+id/home_menu"
+        app:showAsAction="always"
+        android:orderInCategory="1"/>
+
+    <item android:title="Near By"
+        android:id="@+id/near_by_menu"
+        app:showAsAction="collapseActionView"
+        android:orderInCategory="2"/>
+
+    <item android:title="Weather"
+        android:id="@+id/weather_menu"
+        app:showAsAction="collapseActionView"
+        android:orderInCategory="3"/>
+
+    <item android:title="Logout"
+        android:id="@+id/logout_menu"
+        app:showAsAction="collapseActionView"
+        android:orderInCategory="4"/>
+</menu>

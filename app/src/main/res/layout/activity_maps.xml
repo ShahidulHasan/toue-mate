@@ -1,0 +1,89 @@
+<FrameLayout xmlns:android2="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="https://schemas.android.com/apk/res/android"
+    android2:layout_width="wrap_content"
+    android2:layout_height="wrap_content"
+    >
+
+    <fragment
+
+        android2:layout_width="383dp"
+        android2:layout_height="201dp"
+        android2:name="com.google.android.gms.maps.SupportMapFragment"
+        android2:id="@+id/map"
+        android2:layout_gravity="right">
+
+    </fragment>
+
+    <LinearLayout xmlns:android="https://schemas.android.com/apk/res/android"
+        xmlns:tools="https://schemas.android.com/tools"
+
+        android2:layout_width="match_parent"
+        android2:layout_height="wrap_content"
+        android2:orientation="vertical"
+
+        >
+
+        <Button
+            android2:layout_weight="1"
+            android2:id="@+id/btnRestaurant"
+            android2:text="Nearby Restaurants"
+            android2:background="#80000000"
+            android2:layout_marginBottom="3dp"
+            android2:layout_width="match_parent"
+            android2:layout_height="wrap_content"
+        />
+        <Button
+            android2:id="@+id/btnCafe"
+            android2:layout_weight="1"
+            android2:text="Cafe"
+            android2:background="#80000000"
+            android2:layout_marginBottom="3dp"
+            android2:layout_width="match_parent"
+            android2:layout_height="match_parent"
+            />
+        <Button
+            android2:id="@+id/btnMasjidBtn"
+            android2:layout_weight="1"
+            android2:background="#80000000"
+            android2:layout_marginBottom="3dp"
+            android2:text="Masjid"
+            android2:layout_width="match_parent"
+            android2:layout_height="match_parent" />
+        <Button
+            android2:id="@+id/btnAtmBooth"
+            android2:layout_weight="1"
+            android2:background="#80000000"
+            android2:layout_marginBottom="3dp"
+            android2:text="Atm Booth"
+            android2:layout_width="match_parent"
+            android2:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android2:layout_width="wrap_content"
+        android2:layout_height="wrap_content"
+        android2:orientation="vertical"
+        >
+
+        <ListView
+            android2:layout_marginTop="200dp"
+            android2:id="@+id/restaurantListView"
+            android2:layout_width="wrap_content"
+            android2:layout_height="wrap_content"
+            >
+        </ListView>
+
+    </LinearLayout>
+
+
+
+
+
+</FrameLayout>
+
