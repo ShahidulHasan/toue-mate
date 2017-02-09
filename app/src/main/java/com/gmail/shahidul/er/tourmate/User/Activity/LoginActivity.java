@@ -1,6 +1,7 @@
 package com.gmail.shahidul.er.tourmate.User.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,7 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         authStateListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                firebaseUser=auth.getCurrentUser();
+                firebaseUser = auth.getCurrentUser();
+
 
             }
         };
@@ -67,9 +69,16 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()){
                             Toast.makeText(LoginActivity.this, ""+"authentication failed!!!", Toast.LENGTH_SHORT).show();
-                        }else{
-                            FirebaseUser firebaseUser=auth.getCurrentUser();
-                            String email=firebaseUser.getEmail();
+                        }else {
+                            FirebaseUser firebaseUser = auth.getCurrentUser();
+                            String email=  firebaseUser.getEmail();
+
+                            SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+
+                            SharedPreferences.Editor editor = saveUserData.edit();
+                            editor.putString("email",email);
+                            editor.apply();
+                            editor.commit();
 
                             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                             intent.putExtra("email", email);

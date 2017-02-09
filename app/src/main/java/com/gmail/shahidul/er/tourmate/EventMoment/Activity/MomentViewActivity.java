@@ -9,6 +9,7 @@ import com.gmail.shahidul.er.tourmate.R;
 
 public class MomentViewActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

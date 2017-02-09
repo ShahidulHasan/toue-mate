@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.gmail.shahidul.er.tourmate.Home.Activity.HomeActivity;
 import com.gmail.shahidul.er.tourmate.Location.Activity.MapsActivity;
@@ -48,9 +47,8 @@ public class BaseActivity extends AppCompatActivity {
                 SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
                 SharedPreferences.Editor editor = saveUserData.edit();
-                int userId = saveUserData.getInt("userId",0);
-                String username = saveUserData.getString("username","");
-                editor.remove("userId");
+                int eventId = saveUserData.getInt("eventId",0);
+                String username = saveUserData.getString("email","");
                 editor.remove("username");
                 editor.apply();
                 editor.commit();

@@ -1,15 +1,13 @@
 package com.gmail.shahidul.er.tourmate.Event.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.gmail.shahidul.er.tourmate.Event.Adapter.EventListAdapter;
-import com.gmail.shahidul.er.tourmate.Event.Dao.EventDAO;
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
 import com.gmail.shahidul.er.tourmate.R;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +38,9 @@ public class EventListActivity extends AppCompatActivity {
         mDatabase.child("events").addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    eventListAdapter.notifyDataSetChanged();
                     eventArrayList.add(data.getValue(Event.class));
+
                 }
             }
 
@@ -50,15 +50,29 @@ public class EventListActivity extends AppCompatActivity {
             }
         });
 
+
         eventListAdapter = new EventListAdapter(this, eventArrayList);
         events.setAdapter(eventListAdapter);
 
         events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int productId = eventArrayList.get(position).getId();
 
-                Toast.makeText(EventListActivity.this, String.valueOf(productId), Toast.LENGTH_SHORT).show();
+                int eventId = eventArrayList.get(position).getId();
+                float eventCost = eventArrayList.get(position).getCost();
+                String eventLocation = eventArrayList.get(position).getLocation();
+                String userEmail = eventArrayList.get(position).getEmail();
+
+                Event event = new Event();
+                event.setId(eventId);
+                event.setCost(eventCost);
+                event.setLocation(eventLocation);
+                event.setEmail(userEmail);
+
+                Intent intent = new Intent(EventListActivity.this , EventDetailActivity.class);
+                intent.putExtra("EventDetails",event);
+                startActivity(intent);
+
             }
         });
     }
