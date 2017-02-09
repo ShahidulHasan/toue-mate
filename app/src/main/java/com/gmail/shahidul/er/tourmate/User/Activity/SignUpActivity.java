@@ -97,6 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "" + "authentication failed!!!", Toast.LENGTH_SHORT).show();
                         }else{
+                            mDatabase = FirebaseDatabase.getInstance().getReference("profiles");
                             if (i == 0){ i = 1;} else { i++; }
                             Profile profile = new Profile();
                             String profileId = mDatabase.push().getKey();

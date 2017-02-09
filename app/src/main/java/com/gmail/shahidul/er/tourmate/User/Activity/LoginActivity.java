@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gmail.shahidul.er.tourmate.Home.Activity.HomeActivity;
 import com.gmail.shahidul.er.tourmate.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,7 +71,9 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser firebaseUser=auth.getCurrentUser();
                             String email=firebaseUser.getEmail();
 
-                            Toast.makeText(LoginActivity.this, email, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            intent.putExtra("email", email);
+                            startActivity(intent);
                         }
                     }
                 });
