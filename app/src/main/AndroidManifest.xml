@@ -35,6 +35,11 @@
         <activity android:name=".Home.Activity.HomeActivity" />
         <activity android:name=".Event.Activity.EventListActivity" />
         <activity android:name=".Event.Activity.EventAddActivity"></activity>
+
+        <activity android:name=".EventMoment.Activity.EventMomentActivity">
+
+        </activity>
+        <activity android:name=".EventMoment.Activity.MomentViewActivity"></activity>
     </application>
 
 </manifest>
