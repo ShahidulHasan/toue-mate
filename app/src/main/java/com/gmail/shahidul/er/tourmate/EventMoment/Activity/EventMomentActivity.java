@@ -14,9 +14,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.gmail.shahidul.er.tourmate.Event.Model.Event;
 import com.gmail.shahidul.er.tourmate.EventMoment.Model.EventMoment;
 import com.gmail.shahidul.er.tourmate.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,17 +38,49 @@ public class EventMomentActivity extends AppCompatActivity {
     Button takeMomentBtn;
     ImageView imageView;
     Button saveMomentBtn;
-    Event event;
+    String userEmail;
+    int eventId;
+
+    int i = 0;
+
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_moment);
+        Intent intent = getIntent();
+
+        if(intent.getStringExtra("status") == "fromEventDetail") {
+            eventId = intent.getIntExtra("eventId", 0);
+            userEmail = intent.getStringExtra("userEmail");
+        } else{
+            userEmail = intent.getStringExtra("email");
+        }
+
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         momentTitle = (EditText) findViewById(R.id.momentTitleET);
         momentDescription = (EditText) findViewById(R.id.momentDescriptionET);
         takeMomentBtn = (Button) findViewById(R.id.takeMomentBtn);
         imageView = (ImageView) findViewById(R.id.eventMomentImageView);
         saveMomentBtn = (Button) findViewById(R.id.momentSave);
+
+        mDatabase.child("eventMoments").addListenerForSingleValueEvent( new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    i++;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public void takeMoment(View view) {
@@ -96,7 +132,7 @@ public class EventMomentActivity extends AppCompatActivity {
             options.inJustDecodeBounds = false;
             options.inSampleSize=scaleFactor;
 
-            bitmap=BitmapFactory.decodeFile(currentMomentPhotoPath,options);
+            bitmap = BitmapFactory.decodeFile(currentMomentPhotoPath,options);
             imageView.setImageBitmap(bitmap);
 
         }
@@ -104,12 +140,19 @@ public class EventMomentActivity extends AppCompatActivity {
 
     public void saveMoment(View view) {
 
-        EventMoment eventMoment = new EventMoment();
+        if (i == 0){ i = 1;} else { i++; }
 
-        eventMoment.setEventId(1);
+        mDatabase = FirebaseDatabase.getInstance().getReference("eventMoments");
+        EventMoment eventMoment = new EventMoment();
+        String eventId = mDatabase.push().getKey();
+
+        eventMoment.setEventId(i);
+        eventMoment.setUserEmail(userEmail);
         eventMoment.setMomentPhotoPath(currentMomentPhotoPath);
         eventMoment.setTitle(momentTitle.getText().toString());
         eventMoment.setDescription(momentDescription.getText().toString());
+
+        mDatabase.child(eventId).setValue(eventMoment);
 
         Intent intent = new Intent(EventMomentActivity.this,MomentViewActivity.class);
         intent.putExtra("eventMoment",eventMoment);

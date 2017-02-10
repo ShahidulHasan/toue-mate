@@ -1,6 +1,7 @@
 package com.gmail.shahidul.er.tourmate.Event.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -54,16 +55,18 @@ public class EventAddActivity extends AppCompatActivity {
         final String location = locationET.getText().toString().trim();
         final String cost = costET.getText().toString().trim();
 //        final String date = dateET.getText().toString().trim();
+        SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
         mDatabase = FirebaseDatabase.getInstance().getReference("events");
         Event event = new Event();
+        String email = saveUserData.getString("email","");
         String eventId = mDatabase.push().getKey();
         event.setId(i);
         event.setLocation(location);
         event.setCost(Float.valueOf(cost));
         event.setCreatedAt(new Date());
         event.setExpense(null);
-//        event.setEmail(email);
+        event.setEmail(email);
 //        event.setDate(date);
 
         mDatabase.child(eventId).setValue(event);

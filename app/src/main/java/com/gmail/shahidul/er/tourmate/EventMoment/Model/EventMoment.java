@@ -13,21 +13,24 @@ public class EventMoment implements Serializable {
     private  String Title;
     private String Description;
     private String momentPhotoPath;
+    private String userEmail;
 
     public EventMoment() {
 
     }
-    public EventMoment(int momentId, int eventId, String title, String description, String momentPhotoPath) {
+    public EventMoment(int momentId, int eventId, String title, String description, String momentPhotoPath,String userEmail) {
         this.momentId = momentId;
+        this.userEmail = userEmail;
         this.eventId = eventId;
-        Title = title;
+        this.Title = title;
         Description = description;
         this.momentPhotoPath = momentPhotoPath;
     }
-    public EventMoment(int eventId, String title, String description, String momentPhotoPath) {
+    public EventMoment(int eventId, String title, String description, String momentPhotoPath,String userEmail) {
 
         this.eventId = eventId;
-        Title = title;
+        this.userEmail = userEmail;
+        this.Title = title;
         Description = description;
         this.momentPhotoPath = momentPhotoPath;
     }
@@ -70,5 +73,12 @@ public class EventMoment implements Serializable {
 
     public void setMomentPhotoPath(String momentPhotoPath) {
         this.momentPhotoPath = momentPhotoPath;
+    }
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

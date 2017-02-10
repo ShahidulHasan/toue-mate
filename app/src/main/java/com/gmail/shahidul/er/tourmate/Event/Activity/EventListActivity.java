@@ -38,11 +38,12 @@ public class EventListActivity extends AppCompatActivity {
 
         mDatabase.child("events").addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
+                eventListAdapter.notifyDataSetChanged();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    eventListAdapter.notifyDataSetChanged();
                     eventArrayList.add(data.getValue(Event.class));
 
                 }
+
             }
 
             @Override
