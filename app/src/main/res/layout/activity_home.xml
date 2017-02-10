@@ -18,23 +18,47 @@
         android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/productSale"
+        android:id="@+id/eventMomentBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:text="Event Moment"
+        android:onClick="eventMomentAction"
         android:background="#ea4c88"
         android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/productList"
+        android:id="@+id/eventExpenseBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="#ea4c88"
+        android:text="Event Expense"
+        android:textColor="#ffffff" />
+    <Button
+        android:id="@+id/nearByBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#ea4c88"
+        android:text="Near By"
+        android:onClick="nearByAction"
+        android:textColor="#ffffff" />
+    <Button
+        android:id="@+id/weatherBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#ea4c88"
+        android:text="Weather"
         android:textColor="#ffffff" />
 
     <Button

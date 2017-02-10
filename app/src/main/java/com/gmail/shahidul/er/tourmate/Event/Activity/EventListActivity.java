@@ -22,6 +22,7 @@ public class EventListActivity extends AppCompatActivity {
 
     ListView events;
     ArrayList<Event> eventArrayList = new ArrayList<>();
+
     EventListAdapter eventListAdapter;
     private DatabaseReference mDatabase;
 

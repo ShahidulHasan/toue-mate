@@ -1,13 +1,14 @@
 package com.gmail.shahidul.er.tourmate.Home.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.gmail.shahidul.er.tourmate.BaseActivity;
 import com.gmail.shahidul.er.tourmate.Event.Activity.EventListActivity;
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
+import com.gmail.shahidul.er.tourmate.EventMoment.Activity.EventMomentActivity;
+import com.gmail.shahidul.er.tourmate.Location.Activity.MapsActivity;
 import com.gmail.shahidul.er.tourmate.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,5 +48,17 @@ public class HomeActivity extends BaseActivity {
         Intent intent = new Intent(getApplicationContext(), EventListActivity.class);
         intent.putExtra("eventArrayList", eventArrayList);
         startActivity(intent);
+    }
+
+    public void nearByAction(View view) {
+
+        Intent nearByIntent = new Intent(HomeActivity.this,MapsActivity.class);
+        startActivity(nearByIntent);
+    }
+
+    public void eventMomentAction(View view) {
+
+        Intent eventMomentIntent = new Intent(HomeActivity.this,EventMomentActivity.class);
+        startActivity(eventMomentIntent);
     }
 }

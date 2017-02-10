@@ -21,6 +21,12 @@ public class EventDetailActivity extends AppCompatActivity {
     TextView eventBudget;
     TextView eventDate;
     String userEmail;
+    TextView tv1;
+    TextView tv2;
+    TextView tv3;
+    TextView tv4;
+    TextView tv5;
+
     int EventId;
     Event event;
     Event eventDetail;
@@ -35,14 +41,21 @@ public class EventDetailActivity extends AppCompatActivity {
         eventMoment = (Button) findViewById(R.id.eventMomentBtn);
 
         eventId = (TextView) findViewById(R.id.eventIdDataTV);
-        eventLocation = (TextView) findViewById(R.id.LocationDataTV);
+        eventLocation = (TextView) findViewById(R.id.locationDataTV);
         eventBudget = (TextView) findViewById(R.id.budgetDataTV);
         eventDate = (TextView) findViewById(R.id.DateDataTV);
 
+        tv1 = (TextView) findViewById(R.id.eventTitleTV);
+        tv2 = (TextView) findViewById(R.id.eventIdTV);
+        tv3 = (TextView) findViewById(R.id.locationTV);
+        tv4 = (TextView) findViewById(R.id.BudgetTV);
+        tv5 = (TextView) findViewById(R.id.dateTV);
+
         Event eventDetail = (Event) getIntent().getSerializableExtra("EventDetails");
 
-
-//        eventId.setText(eventDetail.getId());
+        eventLocation.setText(eventDetail.getLocation().toString());
+        eventId.setText("" + eventDetail.getId());
+        eventBudget.setText("" + eventDetail.getCost());
 
         Toast.makeText(this, eventDetail.getLocation(), Toast.LENGTH_SHORT).show();
     }
