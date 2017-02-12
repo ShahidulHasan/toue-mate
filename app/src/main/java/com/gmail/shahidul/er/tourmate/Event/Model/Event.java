@@ -11,7 +11,9 @@ public class Event implements Serializable {
     private int id;
     private String location;
     private String email;
-    private Date date;
+    private String date;
+
+    private String endDate;
     private Date createdAt;
     private Float cost;
     private Float expense;
@@ -40,13 +42,6 @@ public class Event implements Serializable {
         this.email = email;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public Date getCreatedAt() {
         return createdAt;
@@ -70,5 +65,21 @@ public class Event implements Serializable {
 
     public void setExpense(Float expense) {
         this.expense = expense;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

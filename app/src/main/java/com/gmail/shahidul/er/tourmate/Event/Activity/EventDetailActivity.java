@@ -21,7 +21,8 @@ public class EventDetailActivity extends AppCompatActivity {
     TextView eventId;
     TextView eventLocation;
     TextView eventBudget;
-    TextView eventDate;
+    TextView eventStartDate;
+    TextView eventEndDate;
     TextView createdAt;
     String userEmail;
     TextView tv1;
@@ -30,6 +31,7 @@ public class EventDetailActivity extends AppCompatActivity {
     TextView tv4;
     TextView tv5;
     TextView tv6;
+    TextView tv7;
 
     int eventIdForEventMoment;
     Event event;
@@ -47,7 +49,8 @@ public class EventDetailActivity extends AppCompatActivity {
         eventId = (TextView) findViewById(R.id.eventIdDataTV);
         eventLocation = (TextView) findViewById(R.id.locationDataTV);
         eventBudget = (TextView) findViewById(R.id.budgetDataTV);
-        eventDate = (TextView) findViewById(R.id.DateDataTV);
+        eventStartDate = (TextView) findViewById(R.id.DateDataTV);
+        eventEndDate = (TextView) findViewById(R.id.DateEndDataTV);
         createdAt = (TextView) findViewById(R.id.createdAtTV);
 
         tv1 = (TextView) findViewById(R.id.eventTitleTV);
@@ -55,13 +58,16 @@ public class EventDetailActivity extends AppCompatActivity {
         tv3 = (TextView) findViewById(R.id.locationTV);
         tv4 = (TextView) findViewById(R.id.BudgetTV);
         tv5 = (TextView) findViewById(R.id.dateTV);
-        tv6 = (TextView) findViewById(R.id.createdAt);
+        tv6 = (TextView) findViewById(R.id.endDate);
+        tv7 = (TextView) findViewById(R.id.createdAt);
 
         Event eventDetail = (Event) getIntent().getSerializableExtra("EventDetails");
 
         eventLocation.setText(eventDetail.getLocation().toString());
         eventId.setText("" + eventDetail.getId());
         eventBudget.setText("" + eventDetail.getCost());
+        eventStartDate.setText(eventDetail.getDate() != null ? eventDetail.getDate().toString():"");
+        eventEndDate.setText(eventDetail.getEndDate() != null ? eventDetail.getEndDate().toString():"");
         createdAt.setText(eventDetail.getEmail() != null ? eventDetail.getEmail().toString():"");
         userEmail = eventDetail.getEmail();
         eventIdForEventMoment = eventDetail.getId();

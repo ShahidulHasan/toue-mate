@@ -64,12 +64,16 @@ public class EventListActivity extends AppCompatActivity {
                 float eventCost = eventArrayList.get(position).getCost();
                 String eventLocation = eventArrayList.get(position).getLocation();
                 String userEmail = eventArrayList.get(position).getEmail();
+                String startDate = eventArrayList.get(position).getDate();
+                String endDate = eventArrayList.get(position).getEndDate();
 
                 Event event = new Event();
                 event.setId(eventId);
                 event.setCost(eventCost);
                 event.setLocation(eventLocation);
                 event.setEmail(userEmail);
+                event.setDate(startDate);
+                event.setEndDate(endDate);
 
                 Intent intent = new Intent(EventListActivity.this , EventDetailActivity.class);
                 intent.putExtra("EventDetails",event);

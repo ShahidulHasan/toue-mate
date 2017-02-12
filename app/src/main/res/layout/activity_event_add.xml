@@ -28,8 +28,17 @@
         </EditText>
 
         <EditText
-            android:id="@+id/date"
-            android:hint="Date"
+            android:id="@+id/startDate"
+            android:hint="Start Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:inputType="textCapWords"/>
+
+        <EditText
+            android:id="@+id/endDate"
+            android:hint="End Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
