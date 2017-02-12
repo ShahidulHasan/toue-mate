@@ -41,6 +41,7 @@ public class EventMomentActivity extends AppCompatActivity {
     Button saveMomentBtn;
     String userEmail;
     int eventIdForEventMoment;
+    String eventIdEachMoment;
 
     int i = 0;
 
@@ -55,6 +56,7 @@ public class EventMomentActivity extends AppCompatActivity {
         if(intent.getStringExtra("status") == "fromEventDetail") {
 
             eventIdForEventMoment = intent.getIntExtra("eventIdForEventMoment",0);
+            eventIdEachMoment = intent.getStringExtra("eventIdEachMoment");
 
             userEmail = intent.getStringExtra("userEmail");
         } else{
@@ -143,12 +145,16 @@ public class EventMomentActivity extends AppCompatActivity {
 
     public void saveMoment(View view) {
 
+
+
+
+
         if (i == 0){ i = 1;} else { i++; }
         SharedPreferences getData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
         String email = getData.getString("email","");
         int eventIdEachEventMoment = getData.getInt("eventIdForEachEvent",0);
-
+        String eventIdEachMoment = getData.getString("eventIdEachMoment"," ");
         mDatabase = FirebaseDatabase.getInstance().getReference("eventMoments");
 
         EventMoment eventMoment = new EventMoment();
@@ -157,6 +163,7 @@ public class EventMomentActivity extends AppCompatActivity {
 
         eventMoment.setMomentId(eventMomentId);
         eventMoment.setEventId(eventIdEachEventMoment);
+        eventMoment.setEventIdEachMoment(eventIdEachMoment);
         eventMoment.setUserEmail(email);
         eventMoment.setMomentPhotoPath(currentMomentPhotoPath);
         eventMoment.setTitle(momentTitle.getText().toString());

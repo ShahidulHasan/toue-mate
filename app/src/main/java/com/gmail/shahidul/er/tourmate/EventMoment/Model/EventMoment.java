@@ -10,6 +10,7 @@ public class EventMoment implements Serializable {
 
     private String momentId;
     private int  eventId;
+    private String  eventIdEachMoment;
     private  String Title;
     private String Description;
     private String momentPhotoPath;
@@ -80,5 +81,13 @@ public class EventMoment implements Serializable {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public String getEventIdEachMoment() {
+        return eventIdEachMoment;
+    }
+
+    public void setEventIdEachMoment(String eventIdEachMoment) {
+        this.eventIdEachMoment = eventIdEachMoment;
     }
 }

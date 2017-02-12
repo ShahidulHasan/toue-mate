@@ -35,6 +35,7 @@ public class EventDetailActivity extends AppCompatActivity {
     TextView tv7;
 
     int eventIdForEventMoment;
+    String eventIdEachMoment;
     Event event;
     Event eventDetail;
     @Override
@@ -72,11 +73,13 @@ public class EventDetailActivity extends AppCompatActivity {
         createdAt.setText(eventDetail.getEmail() != null ? eventDetail.getEmail().toString():"");
         userEmail = eventDetail.getEmail();
         eventIdForEventMoment = eventDetail.getId();
+        eventIdEachMoment = eventDetail.getEventId();
 
         SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
         SharedPreferences.Editor editor = saveUserData.edit();
         editor.putInt("eventIdForEachEvent",eventIdForEventMoment);
+        editor.putString("eventIdEachMoment",eventIdEachMoment);
         editor.apply();
         editor.commit();
     }
@@ -97,6 +100,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
         Intent momentIntent = new Intent(EventDetailActivity.this, EventMomentActivity.class);
         momentIntent.putExtra("eventIdForEventMoment",eventIdForEventMoment);
+
+        momentIntent.putExtra("eventIdEachMoment",eventIdEachMoment);
         momentIntent.putExtra("userEmail",userEmail);
         momentIntent.putExtra("status","fromEventDetail");
         startActivity(momentIntent);

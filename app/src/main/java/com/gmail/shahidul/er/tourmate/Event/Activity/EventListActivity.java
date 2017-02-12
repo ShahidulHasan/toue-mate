@@ -71,6 +71,7 @@ public class EventListActivity extends AppCompatActivity {
                 String userEmail = eventArrayList.get(position).getEmail();
                 String startDate = eventArrayList.get(position).getDate();
                 String endDate = eventArrayList.get(position).getEndDate();
+                String eventIdEachMoment = eventArrayList.get(position).getEventId();
 
                 Event event = new Event();
                 event.setId(eventId);
@@ -79,6 +80,7 @@ public class EventListActivity extends AppCompatActivity {
                 event.setEmail(userEmail);
                 event.setDate(startDate);
                 event.setEndDate(endDate);
+                event.setEventId(eventIdEachMoment);
 
                 Intent intent = new Intent(EventListActivity.this , EventDetailActivity.class);
                 intent.putExtra("EventDetails",event);
