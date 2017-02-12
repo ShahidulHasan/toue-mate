@@ -9,6 +9,7 @@ import java.util.Date;
 public class Event implements Serializable {
 
     private int id;
+    private String eventId;
     private String location;
     private String email;
     private String date;
@@ -81,5 +82,13 @@ public class Event implements Serializable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 }

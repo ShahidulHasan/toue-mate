@@ -127,6 +127,7 @@ public class EventAddActivity extends AppCompatActivity {
 
         String eventId = mDatabase.push().getKey();
         event.setId(i);
+        event.setEventId(eventId);
         event.setLocation(location);
         event.setCost(Float.valueOf(cost));
         event.setCreatedAt(new Date());
