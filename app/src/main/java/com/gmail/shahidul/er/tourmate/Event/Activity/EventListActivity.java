@@ -1,6 +1,7 @@
 package com.gmail.shahidul.er.tourmate.Event.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -35,8 +37,11 @@ public class EventListActivity extends AppCompatActivity {
         events = (ListView) findViewById(R.id.events);
 
 //        eventArrayList = (ArrayList<Event>) getIntent().getSerializableExtra("eventArrayList");
+        SharedPreferences getEmail = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
-        mDatabase.child("events").addValueEventListener(new ValueEventListener() {
+        String email = getEmail.getString("email","");
+
+        mDatabase.child("events").orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 eventListAdapter.notifyDataSetChanged();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
