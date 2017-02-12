@@ -1,9 +1,11 @@
 package com.gmail.shahidul.er.tourmate.EventMoment.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,19 +36,22 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
     Context context;
     private DatabaseReference mDatabase;
 
-
     public EventMomentListAdapter(Context context, ArrayList<EventMoment> eventMoments) {
 
         super(context, R.layout.activity_event_moment_row, eventMoments);
         eventMomentArrayList = eventMoments;
         this.context = context;
+
+
     }
+
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
         final EventMoment eventMoment = eventMomentArrayList.get(position);
+
 
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_event_moment_row, viewGroup, false);
 
@@ -78,6 +83,7 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
 
         eventMomentDeleteBtn.setOnClickListener(new View.OnClickListener() {
 
+
            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
             Query applesQuery = mDatabase.child("eventMoments").orderByChild("eventId").equalTo(eventMoment.getEventId());
@@ -85,19 +91,43 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
             public void onClick(View v) {
 
 
-                applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
-                            appleSnapshot.getRef().removeValue();
-                        }
-                    }
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder
+                        .setMessage("Are uou want to delete")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e("deleted", "onCancelled", databaseError.toException());
-                    }
-                });
+                                applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                                            appleSnapshot.getRef().removeValue();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Log.e("deleted", "onCancelled", databaseError.toException());
+                                    }
+                                });
+
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
+
                /* Intent intent = new Intent(context.getApplicationContext(), ProductUpdateActivity.class);
                 intent.putExtra("products", product);
                 context.startActivity(intent);*/
@@ -106,4 +136,5 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
 
         return convertView;
     }
+
 }
