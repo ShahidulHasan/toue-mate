@@ -122,7 +122,9 @@ public class EventAddActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("events");
         Event event = new Event();
+
         String email = saveUserData.getString("email","");
+
         String eventId = mDatabase.push().getKey();
         event.setId(i);
         event.setLocation(location);

@@ -1,6 +1,7 @@
 package com.gmail.shahidul.er.tourmate.Event.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -71,7 +72,13 @@ public class EventDetailActivity extends AppCompatActivity {
         createdAt.setText(eventDetail.getEmail() != null ? eventDetail.getEmail().toString():"");
         userEmail = eventDetail.getEmail();
         eventIdForEventMoment = eventDetail.getId();
-        Toast.makeText(this, eventDetail.getLocation(), Toast.LENGTH_SHORT).show();
+
+        SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+
+        SharedPreferences.Editor editor = saveUserData.edit();
+        editor.putInt("eventIdForEachEvent",eventIdForEventMoment);
+        editor.apply();
+        editor.commit();
     }
 
     public void deleteAction(View view) {
@@ -89,7 +96,7 @@ public class EventDetailActivity extends AppCompatActivity {
     public void momentAction(View view) {
 
         Intent momentIntent = new Intent(EventDetailActivity.this, EventMomentActivity.class);
-        momentIntent.putExtra("eventId",eventIdForEventMoment);
+        momentIntent.putExtra("eventIdForEventMoment",eventIdForEventMoment);
         momentIntent.putExtra("userEmail",userEmail);
         momentIntent.putExtra("status","fromEventDetail");
         startActivity(momentIntent);

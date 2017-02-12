@@ -1,5 +1,6 @@
 package com.gmail.shahidul.er.tourmate.EventMoment.Activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -60,28 +61,13 @@ public class MomentViewActivity extends AppCompatActivity {
 
         eventMomentListAdapter = new EventMomentListAdapter(MomentViewActivity.this, eventMomentArrayList);
         eventMoments.setAdapter(eventMomentListAdapter);
+        SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
-      /*  events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                int eventId = eventArrayList.get(position).getId();
-                float eventCost = eventArrayList.get(position).getCost();
-                String eventLocation = eventArrayList.get(position).getLocation();
-                String userEmail = eventArrayList.get(position).getEmail();
-
-                Event event = new Event();
-                event.setId(eventId);
-                event.setCost(eventCost);
-                event.setLocation(eventLocation);
-                event.setEmail(userEmail);
-
-                Intent intent = new Intent(MomentViewActivity.this , EventDetailActivity.class);
-                intent.putExtra("EventDetails",event);
-                startActivity(intent);
-
-            }
-        });*/
+        SharedPreferences.Editor editor = saveUserData.edit();
+        int eventId = saveUserData.getInt("eventIdForEachEvent",0);
+        editor.remove("eventIdForEachEvent");
+        editor.apply();
+        editor.commit();
 
     }
 

@@ -1,6 +1,7 @@
 package com.gmail.shahidul.er.tourmate.EventMoment.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -39,7 +40,7 @@ public class EventMomentActivity extends AppCompatActivity {
     ImageView imageView;
     Button saveMomentBtn;
     String userEmail;
-    int eventId;
+    int eventIdForEventMoment;
 
     int i = 0;
 
@@ -52,7 +53,9 @@ public class EventMomentActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if(intent.getStringExtra("status") == "fromEventDetail") {
-            eventId = intent.getIntExtra("eventId", 0);
+
+            eventIdForEventMoment = intent.getIntExtra("eventIdForEventMoment",0);
+
             userEmail = intent.getStringExtra("userEmail");
         } else{
             userEmail = intent.getStringExtra("email");
@@ -141,18 +144,25 @@ public class EventMomentActivity extends AppCompatActivity {
     public void saveMoment(View view) {
 
         if (i == 0){ i = 1;} else { i++; }
+        SharedPreferences getData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+
+        String email = getData.getString("email","");
+        int eventIdEachEventMoment = getData.getInt("eventIdForEachEvent",0);
 
         mDatabase = FirebaseDatabase.getInstance().getReference("eventMoments");
-        EventMoment eventMoment = new EventMoment();
-        String eventId = mDatabase.push().getKey();
 
-        eventMoment.setEventId(i);
-        eventMoment.setUserEmail(userEmail);
+        EventMoment eventMoment = new EventMoment();
+
+        String eventMomentId = FirebaseDatabase.getInstance().getReference("eventMoments").push().getKey();
+
+        eventMoment.setMomentId(eventMomentId);
+        eventMoment.setEventId(eventIdEachEventMoment);
+        eventMoment.setUserEmail(email);
         eventMoment.setMomentPhotoPath(currentMomentPhotoPath);
         eventMoment.setTitle(momentTitle.getText().toString());
         eventMoment.setDescription(momentDescription.getText().toString());
 
-        mDatabase.child(eventId).setValue(eventMoment);
+        mDatabase.child(eventMomentId).setValue(eventMoment);
 
         Intent intent = new Intent(EventMomentActivity.this,MomentViewActivity.class);
         intent.putExtra("eventMoment",eventMoment);

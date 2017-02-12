@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class EventMoment implements Serializable {
 
-    private int momentId;
+    private String momentId;
     private int  eventId;
     private  String Title;
     private String Description;
@@ -18,7 +18,7 @@ public class EventMoment implements Serializable {
     public EventMoment() {
 
     }
-    public EventMoment(int momentId, int eventId, String title, String description, String momentPhotoPath,String userEmail) {
+    public EventMoment(String momentId, int eventId, String title, String description, String momentPhotoPath,String userEmail) {
         this.momentId = momentId;
         this.userEmail = userEmail;
         this.eventId = eventId;
@@ -35,11 +35,11 @@ public class EventMoment implements Serializable {
         this.momentPhotoPath = momentPhotoPath;
     }
 
-    public int getMomentId() {
+    public String getMomentId() {
         return momentId;
     }
 
-    public void setMomentId(int momentId) {
+    public void setMomentId(String momentId) {
         this.momentId = momentId;
     }
 
