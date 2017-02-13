@@ -7,6 +7,7 @@ import android.view.View;
 import com.gmail.shahidul.er.tourmate.BaseActivity;
 import com.gmail.shahidul.er.tourmate.Event.Activity.EventListActivity;
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
+import com.gmail.shahidul.er.tourmate.EventExpense.Activity.EventExpenseActivity;
 import com.gmail.shahidul.er.tourmate.EventExpense.Activity.EventExpenseAddActivity;
 import com.gmail.shahidul.er.tourmate.EventMoment.Activity.EventMomentActivity;
 import com.gmail.shahidul.er.tourmate.EventMoment.Activity.MomentViewActivity;
@@ -66,7 +67,7 @@ public class HomeActivity extends BaseActivity {
 
     public void eventExpenseAction(View view) {
 
-        Intent eventExpenseIntent = new Intent(HomeActivity.this,EventExpenseAddActivity.class);
+        Intent eventExpenseIntent = new Intent(HomeActivity.this,EventExpenseActivity.class);
         startActivity(eventExpenseIntent);
     }
 }

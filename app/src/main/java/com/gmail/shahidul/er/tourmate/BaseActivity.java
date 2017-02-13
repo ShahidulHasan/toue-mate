@@ -47,7 +47,7 @@ public class BaseActivity extends AppCompatActivity {
                 SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
                 SharedPreferences.Editor editor = saveUserData.edit();
-                int eventId = saveUserData.getInt("eventId",0);
+
                 String username = saveUserData.getString("email","");
                 editor.remove("username");
                 editor.apply();
