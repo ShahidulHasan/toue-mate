@@ -10,9 +10,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.gmail.shahidul.er.tourmate.EventMoment.Model.EventMoment;
@@ -26,7 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class EventMomentActivity extends AppCompatActivity {
@@ -39,6 +43,7 @@ public class EventMomentActivity extends AppCompatActivity {
     Button takeMomentBtn;
     ImageView imageView;
     Button saveMomentBtn;
+    Spinner eventList;
     String userEmail;
     int eventIdForEventMoment;
     String eventIdEachMoment;
@@ -71,13 +76,30 @@ public class EventMomentActivity extends AppCompatActivity {
         takeMomentBtn = (Button) findViewById(R.id.takeMomentBtn);
         imageView = (ImageView) findViewById(R.id.eventMomentImageView);
         saveMomentBtn = (Button) findViewById(R.id.momentSave);
+        eventList = (Spinner) findViewById(R.id.eventListsSP);
 
-        mDatabase.child("eventMoments").addListenerForSingleValueEvent( new ValueEventListener() {
+
+        mDatabase.child("events").addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final List<String> eventSpinnerList = new ArrayList<String>();
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+                    String eventId = data.child("eventId").getValue(String.class);
+                    String eventName = data.child("location").getValue(String.class);
+
+                    eventSpinnerList.add(eventName);
+
                     i++;
                 }
+
+                Spinner eventSpinner = eventList;
+                ArrayAdapter<String> EventSpinnerAdapter = new ArrayAdapter<String>(EventMomentActivity.this, android.R.layout.simple_spinner_item, eventSpinnerList);
+                EventSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                eventSpinner.setAdapter(EventSpinnerAdapter);
             }
 
             @Override
@@ -145,10 +167,6 @@ public class EventMomentActivity extends AppCompatActivity {
 
     public void saveMoment(View view) {
 
-
-
-
-
         if (i == 0){ i = 1;} else { i++; }
         SharedPreferences getData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
@@ -168,6 +186,7 @@ public class EventMomentActivity extends AppCompatActivity {
         eventMoment.setMomentPhotoPath(currentMomentPhotoPath);
         eventMoment.setTitle(momentTitle.getText().toString());
         eventMoment.setDescription(momentDescription.getText().toString());
+        eventMoment.setEventIdEachMoment(eventList.getSelectedItem().toString());
 
         mDatabase.child(eventMomentId).setValue(eventMoment);
 
@@ -176,4 +195,5 @@ public class EventMomentActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
 }

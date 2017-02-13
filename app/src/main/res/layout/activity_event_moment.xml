@@ -21,7 +21,13 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             >-->
-
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventListsSP"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"/>
             <EditText
 
                 android:id="@+id/momentTitleET"

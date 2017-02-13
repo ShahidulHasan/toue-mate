@@ -38,6 +38,7 @@
         android:layout_marginRight="30dp"
         android:background="#ea4c88"
         android:text="Event Expense"
+        android:onClick="eventExpenseAction"
         android:textColor="#ffffff" />
     <Button
         android:id="@+id/nearByBtn"

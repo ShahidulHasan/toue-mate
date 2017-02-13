@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_event_expense_add"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.gmail.shahidul.er.tourmate.EventExpense.Activity.EventExpenseAddActivity">
+
+    <TextView
+        android:id="@+id/titlePage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Add Expense"
+        android:gravity="center"
+
+        />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
+
+        <Spinner
+            android:id="@+id/eventExpenseListsSP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"/>
+
+        <EditText
+            android:id="@+id/expenseCause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Expense Cause "
+            android:padding="10dp"
+            android:inputType="textCapWords">
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/expenseDate"
+            android:hint="Start Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:inputType="textCapWords"/>
+
+        <EditText
+            android:id="@+id/expenseCost"
+            android:hint="Expense Cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:inputType="textCapWords"/>
+
+        <Button
+            android:id="@+id/eventExpenseSaveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ea4c88"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:onClick="eventExpenseSaveAction"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Save"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,13 +1,16 @@
 package com.gmail.shahidul.er.tourmate.EventMoment.Activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.gmail.shahidul.er.tourmate.EventMoment.Adapter.EventMomentListAdapter;
 import com.gmail.shahidul.er.tourmate.EventMoment.Model.EventMoment;
+import com.gmail.shahidul.er.tourmate.Home.Activity.HomeActivity;
 import com.gmail.shahidul.er.tourmate.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,4 +74,9 @@ public class MomentViewActivity extends AppCompatActivity {
 
     }
 
+    public void addEventMomentAction(View view) {
+
+        Intent eventMomentIntent = new Intent(MomentViewActivity.this,EventMomentActivity.class);
+        startActivity(eventMomentIntent);
+    }
 }

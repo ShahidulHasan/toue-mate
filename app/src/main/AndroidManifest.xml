@@ -23,7 +23,7 @@
 
         <activity
             android:name=".Location.Activity.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity android:name=".User.Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,9 +35,11 @@
         <activity android:name=".Home.Activity.HomeActivity" />
         <activity android:name=".Event.Activity.EventListActivity" />
         <activity android:name=".Event.Activity.EventAddActivity" />
-        <activity android:name=".EventMoment.Activity.EventMomentActivity"></activity>
+        <activity android:name=".EventMoment.Activity.EventMomentActivity" />
         <activity android:name=".EventMoment.Activity.MomentViewActivity" />
-        <activity android:name=".Event.Activity.EventDetailActivity"></activity>
+        <activity android:name=".Event.Activity.EventDetailActivity" />
+        <activity android:name=".EventExpense.Activity.EventExpenseActivity" />
+        <activity android:name=".EventExpense.Activity.EventExpenseAddActivity"></activity>
     </application>
 
 </manifest>

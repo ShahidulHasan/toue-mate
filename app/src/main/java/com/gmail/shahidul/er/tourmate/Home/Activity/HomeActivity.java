@@ -7,7 +7,9 @@ import android.view.View;
 import com.gmail.shahidul.er.tourmate.BaseActivity;
 import com.gmail.shahidul.er.tourmate.Event.Activity.EventListActivity;
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
+import com.gmail.shahidul.er.tourmate.EventExpense.Activity.EventExpenseAddActivity;
 import com.gmail.shahidul.er.tourmate.EventMoment.Activity.EventMomentActivity;
+import com.gmail.shahidul.er.tourmate.EventMoment.Activity.MomentViewActivity;
 import com.gmail.shahidul.er.tourmate.Location.Activity.MapsActivity;
 import com.gmail.shahidul.er.tourmate.R;
 import com.google.firebase.database.DataSnapshot;
@@ -58,7 +60,13 @@ public class HomeActivity extends BaseActivity {
 
     public void eventMomentAction(View view) {
 
-        Intent eventMomentIntent = new Intent(HomeActivity.this,EventMomentActivity.class);
+        Intent eventMomentIntent = new Intent(HomeActivity.this,MomentViewActivity.class);
         startActivity(eventMomentIntent);
+    }
+
+    public void eventExpenseAction(View view) {
+
+        Intent eventExpenseIntent = new Intent(HomeActivity.this,EventExpenseAddActivity.class);
+        startActivity(eventExpenseIntent);
     }
 }
