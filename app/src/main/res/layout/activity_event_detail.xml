@@ -22,31 +22,6 @@
         />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="#80000000"
-        android:layout_marginBottom="3dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        >
-        <TextView
-            android:id="@+id/eventIdTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Event Id:"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/eventIdDataTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#80000000"
         android:layout_marginBottom="3dp"
@@ -188,15 +163,7 @@
             android:textSize="20sp"
             android:onClick="deleteAction"
             />
-        <Button
-            android:id="@+id/eventEditBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Edit"
-            android:textSize="20sp"
-            android:onClick="editAction"
-            />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

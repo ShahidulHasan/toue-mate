@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.gmail.shahidul.er.tourmate.Event.Activity.EventAddActivity;
 import com.gmail.shahidul.er.tourmate.Event.Activity.EventListActivity;
@@ -41,7 +43,9 @@ public class EventExpenseAddActivity extends AppCompatActivity {
     int i = 0;
     private DatabaseReference mDatabase;
     Calendar myCalendar = Calendar.getInstance();
-
+    float totalCost;
+    float eventBudgetCost;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,28 +58,10 @@ public class EventExpenseAddActivity extends AppCompatActivity {
         expenseCostTV = (EditText) findViewById(R.id.expenseCost);
         expenseSaveBtn = (Button) findViewById(R.id.eventExpenseBtn);
 
-        mDatabase.child("events").addListenerForSingleValueEvent( new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        Intent intent = getIntent();
 
-                final List<String> eventSpinnerList = new ArrayList<String>();
+        eventBudgetCost = intent.getIntExtra("eventBudgetCost",0);
 
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-
-                    String eventId = data.child("eventId").getValue(String.class);
-                    String eventName = data.child("location").getValue(String.class);
-
-                    eventSpinnerList.add(eventName);
-
-                    i++;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -102,6 +88,36 @@ public class EventExpenseAddActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("eventExpenses");
+
+         email = saveUserData.getString("email","");
+
+        String eventIdEachMoment = saveUserData.getString("eventIdEachMoment"," ");
+
+
+        mDatabase.child("eventExpenses").orderByChild("eventId").equalTo(eventIdEachMoment).addValueEventListener(new ValueEventListener() {
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                totalCost = 0;
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+                    totalCost +=  data.getValue(EventExpense.class).getExpenseCost();
+                    Log.d("expense", "1: "+data.getValue(EventExpense.class).getExpenseCost());
+                    Log.d("expense", "2: "+totalCost);
+                }
+                //    checkBudget(totalCost);
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void updateLabel() {
@@ -114,34 +130,42 @@ public class EventExpenseAddActivity extends AppCompatActivity {
 
     public void eventExpenseSaveAction(View view) {
 
-        if (i == 0){ i = 1;} else { i++; }
+        if (eventBudgetCost > totalCost){
 
-        final String expenseCause = expenseCauseTV.getText().toString().trim();
-        final String expenseCost = expenseCostTV.getText().toString().trim();
-        final String expenseDate = expenseDateTV.getText().toString().trim();
+            if (i == 0){ i = 1;} else { i++; }
 
-        SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+            final String expenseCause = expenseCauseTV.getText().toString().trim();
+            final String expenseCost = expenseCostTV.getText().toString().trim();
+            final String expenseDate = expenseDateTV.getText().toString().trim();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("eventExpenses");
+            SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
-        EventExpense eventExpense = new EventExpense();
+            mDatabase = FirebaseDatabase.getInstance().getReference("eventExpenses");
 
-        String email = saveUserData.getString("email","");
-        String eventIdEachMoment = saveUserData.getString("eventIdEachMoment"," ");
+            EventExpense eventExpense = new EventExpense();
 
-        String eventExpenseId = FirebaseDatabase.getInstance().getReference("eventExpenses").push().getKey();
+            String email = saveUserData.getString("email","");
+            String eventIdEachMoment = saveUserData.getString("eventIdEachMoment"," ");
 
-        eventExpense.setExpenseId(eventExpenseId);
-        eventExpense.setUserEmail(email);
-        eventExpense.setExpenseCause(expenseCause);
-        eventExpense.setExpenseCost(Float.valueOf(expenseCost));
-        eventExpense.setExpenseDate(expenseDate);
-        eventExpense.setEventId(eventIdEachMoment);
-        eventExpense.setCreatedAt(new Date());
+            String eventExpenseId = FirebaseDatabase.getInstance().getReference("eventExpenses").push().getKey();
 
-        mDatabase.child(eventExpenseId).setValue(eventExpense);
+                eventExpense.setExpenseId(eventExpenseId);
+                eventExpense.setUserEmail(email);
+                eventExpense.setExpenseCause(expenseCause);
+                eventExpense.setExpenseCost(Float.valueOf(expenseCost));
+                eventExpense.setExpenseDate(expenseDate);
+                eventExpense.setEventId(eventIdEachMoment);
+                eventExpense.setCreatedAt(new Date());
 
-        Intent intent = new Intent(getApplicationContext(), EventExpenseActivity.class);
-        startActivity(intent);
+                mDatabase.child(eventExpenseId).setValue(eventExpense);
+
+                Intent intent = new Intent(getApplicationContext(), EventExpenseActivity.class);
+                startActivity(intent);
+        } else {
+            Toast.makeText(EventExpenseAddActivity.this, "This Expense Cross Your Budget", Toast.LENGTH_SHORT).show();
+
+        }
     }
+
+
 }

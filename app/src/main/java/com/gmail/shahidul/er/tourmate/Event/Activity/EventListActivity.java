@@ -45,6 +45,7 @@ public class EventListActivity extends AppCompatActivity {
         mDatabase.child("events").orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 eventListAdapter.notifyDataSetChanged();
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     eventArrayList.add(data.getValue(Event.class));
 
@@ -58,7 +59,7 @@ public class EventListActivity extends AppCompatActivity {
             }
         });
 
-        eventListAdapter = new EventListAdapter(this, eventArrayList);
+        eventListAdapter = new EventListAdapter(EventListActivity.this, eventArrayList);
         events.setAdapter(eventListAdapter);
 
         events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,7 +73,7 @@ public class EventListActivity extends AppCompatActivity {
                 String startDate = eventArrayList.get(position).getDate();
                 String endDate = eventArrayList.get(position).getEndDate();
                 String eventIdEachMoment = eventArrayList.get(position).getEventId();
-                Toast.makeText(EventListActivity.this, eventIdEachMoment, Toast.LENGTH_SHORT).show();
+
                 Event event = new Event();
                 event.setId(eventId);
                 event.setCost(eventCost);
@@ -101,6 +102,7 @@ public class EventListActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
+
         Intent intent = new Intent(EventListActivity.this, EventAddActivity.class);
         startActivity(intent);
     }

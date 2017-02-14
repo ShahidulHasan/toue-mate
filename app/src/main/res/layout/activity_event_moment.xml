@@ -10,17 +10,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/background"
     tools:context="com.gmail.shahidul.er.tourmate.EventMoment.Activity.EventMomentActivity">
-<!--    <ScrollView
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/HeadingTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            >-->
+            android:text="Add Event Moment"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
 
             <EditText
 
@@ -45,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Take a Moment"
+                android:background="#3f51b4"
                 />
             <ImageView
                 android:src="@mipmap/ic_launcher"
@@ -59,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save a Moment"
+                android:background="#3f51b4"
                 />
 <!--        </LinearLayout>
 

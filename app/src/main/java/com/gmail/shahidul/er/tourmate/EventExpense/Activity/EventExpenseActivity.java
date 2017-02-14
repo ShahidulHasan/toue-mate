@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.gmail.shahidul.er.tourmate.BaseActivity;
 import com.gmail.shahidul.er.tourmate.Event.Adapter.EventListAdapter;
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
 import com.gmail.shahidul.er.tourmate.EventExpense.Adapter.ExpenseListAdapter;
@@ -21,13 +24,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class EventExpenseActivity extends AppCompatActivity {
+public class EventExpenseActivity extends BaseActivity {
 
     ListView eventExpenses;
     ArrayList<EventExpense> eventExpenseArrayList = new ArrayList<>();
 
     ExpenseListAdapter eventExpenseListAdapter;
     private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +46,16 @@ public class EventExpenseActivity extends AppCompatActivity {
         SharedPreferences getData = getSharedPreferences("UserInfo",MODE_PRIVATE );
         String email = getData.getString("email","");
         String eventId = getData.getString("eventIdEachMoment","");
-
-        mDatabase.child("eventExpenses").orderByChild("eventId").equalTo(eventId).addValueEventListener(new ValueEventListener() {
+        Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
+        mDatabase.child("eventExpenses").orderByChild("userEmail").equalTo(email).addValueEventListener(new ValueEventListener() {
 
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 eventExpenseListAdapter.notifyDataSetChanged();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
+
                     eventExpenseArrayList.add(data.getValue(EventExpense.class));
+
                 }
             }
 
@@ -61,6 +68,9 @@ public class EventExpenseActivity extends AppCompatActivity {
         eventExpenseListAdapter = new ExpenseListAdapter(this, eventExpenseArrayList);
         eventExpenses.setAdapter(eventExpenseListAdapter);
     }
+
+
+
 
     public void addEventExpenseFormAction(View view) {
 

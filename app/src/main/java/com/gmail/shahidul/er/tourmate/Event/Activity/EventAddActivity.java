@@ -138,7 +138,7 @@ public class EventAddActivity extends AppCompatActivity {
 
         mDatabase.child(eventId).setValue(event);
 
-        Intent intent = new Intent(getApplicationContext(), EventListActivity.class);
+        Intent intent = new Intent(EventAddActivity.this, EventListActivity.class);
         startActivity(intent);
     }
 

@@ -34,14 +34,11 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 
         TextView location = (TextView) convertView.findViewById(R.id.location);
         TextView cost = (TextView) convertView.findViewById(R.id.cost);
-        TextView expense = (TextView) convertView.findViewById(R.id.expense);
-
-//        Button update = (Button) convertView.findViewById(R.id.update);
-//        Button delete = (Button) convertView.findViewById(R.id.delete);
-
+        TextView eventDate = (TextView) convertView.findViewById(R.id.eventDateTV);
         location.setText(event.getLocation());
-//        cost.setText(Float.toString(event.getCost()));
-//        expense.setText(Float.toString(event.getExpense()));
+        cost.setText(""+event.getCost().toString());
+        eventDate.setText(""+event.getDate());
+
 
         return convertView;
     }

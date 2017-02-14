@@ -62,8 +62,8 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
         eventMomentTitle.setText(eventMoment.getTitle());
         eventMomentDesc.setText(eventMoment.getDescription());
 
-        int targetW = 500;
-        int targetH = 100;
+        int targetW = 200;
+        int targetH = 200;
 
         BitmapFactory.Options options=new BitmapFactory.Options();
         options.inJustDecodeBounds=true;
@@ -129,10 +129,6 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
                 // show it
                 alertDialog.show();
 
-
-               /* Intent intent = new Intent(context.getApplicationContext(), ProductUpdateActivity.class);
-                intent.putExtra("products", product);
-                context.startActivity(intent);*/
             }
         });
 

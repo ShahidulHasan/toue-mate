@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context="com.gmail.shahidul.er.tourmate.Home.Activity.HomeActivity">
 
     <Button
@@ -12,10 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:background="#ea4c88"
+        android:background="#3f51b4"
         android:onClick="event"
         android:text="Event"
-        android:textColor="#ffffff" />
+        android:textSize="30dp"
+         />
 
     <Button
         android:id="@+id/eventMomentBtn"
@@ -26,8 +28,9 @@
         android:layout_marginRight="30dp"
         android:text="Event Moment"
         android:onClick="eventMomentAction"
-        android:background="#ea4c88"
-        android:textColor="#ffffff" />
+        android:background="#3f51b4"
+        android:textSize="30dp"
+        />
 
     <Button
         android:id="@+id/eventExpenseBtn"
@@ -36,10 +39,12 @@
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="#ea4c88"
         android:text="Event Expense"
         android:onClick="eventExpenseAction"
-        android:textColor="#ffffff" />
+        android:background="#3f51b4"
+        android:textSize="30dp"
+
+        />
     <Button
         android:id="@+id/nearByBtn"
         android:layout_width="match_parent"
@@ -47,29 +52,12 @@
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="#ea4c88"
         android:text="Near By"
         android:onClick="nearByAction"
-        android:textColor="#ffffff" />
-    <Button
-        android:id="@+id/weatherBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="#ea4c88"
-        android:text="Weather"
-        android:textColor="#ffffff" />
+        android:background="#3f51b4"
+        android:textSize="30dp"
 
-    <Button
-        android:id="@+id/userList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="#ea4c88"
-        android:text="My Profile"
-        android:textColor="#ffffff" />
+        />
+
 
 </LinearLayout>

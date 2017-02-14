@@ -49,7 +49,9 @@ public class MomentViewActivity extends AppCompatActivity {
 
         mDatabase.child("eventMoments").orderByChild("userEmail").equalTo(email).addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 eventMomentListAdapter.notifyDataSetChanged();
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     eventMomentArrayList.add(data.getValue(EventMoment.class));
 
@@ -63,9 +65,9 @@ public class MomentViewActivity extends AppCompatActivity {
             }
         });
 
-
         eventMomentListAdapter = new EventMomentListAdapter(MomentViewActivity.this, eventMomentArrayList);
         eventMoments.setAdapter(eventMomentListAdapter);
+
         SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
         SharedPreferences.Editor editor = saveUserData.edit();
