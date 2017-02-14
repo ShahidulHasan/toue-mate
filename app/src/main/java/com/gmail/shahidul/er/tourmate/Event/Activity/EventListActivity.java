@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.gmail.shahidul.er.tourmate.BaseActivity;
 import com.gmail.shahidul.er.tourmate.Event.Adapter.EventListAdapter;
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
 import com.gmail.shahidul.er.tourmate.R;
@@ -21,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class EventListActivity extends AppCompatActivity {
+public class EventListActivity extends BaseActivity {
 
     ListView events;
     ArrayList<Event> eventArrayList = new ArrayList<>();

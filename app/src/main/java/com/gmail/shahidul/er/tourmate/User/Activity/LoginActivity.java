@@ -35,12 +35,11 @@ public class LoginActivity extends AppCompatActivity {
         passwordET = (EditText) findViewById(R.id.password);
         submitBtn= (Button) findViewById(R.id.buttonSignIN);
 
-        auth=FirebaseAuth.getInstance();
-        authStateListener=new FirebaseAuth.AuthStateListener() {
+        auth = FirebaseAuth.getInstance();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 firebaseUser = auth.getCurrentUser();
-
 
             }
         };
@@ -60,32 +59,35 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void submit(View view) {
-        String email=emailET.getText().toString().trim();
-        String password=passwordET.getText().toString().trim();
+        String email = emailET.getText().toString().trim();
+        String password = passwordET.getText().toString().trim();
+if(!email.isEmpty() && !password.isEmpty()) {
+    auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(LoginActivity.this, "" + "authentication failed!!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        FirebaseUser firebaseUser = auth.getCurrentUser();
+                        String email = firebaseUser.getEmail();
 
-        auth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, ""+"authentication failed!!!", Toast.LENGTH_SHORT).show();
-                        }else {
-                            FirebaseUser firebaseUser = auth.getCurrentUser();
-                            String email=  firebaseUser.getEmail();
+                        SharedPreferences saveUserData = getSharedPreferences("UserInfo", MODE_PRIVATE);
 
-                            SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+                        SharedPreferences.Editor editor = saveUserData.edit();
+                        editor.putString("email", email);
+                        editor.apply();
+                        editor.commit();
 
-                            SharedPreferences.Editor editor = saveUserData.edit();
-                            editor.putString("email",email);
-                            editor.apply();
-                            editor.commit();
-
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            intent.putExtra("email", email);
-                            startActivity(intent);
-                        }
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
                     }
-                });
+                }
+            });
+} else {
+    Toast.makeText(this, "email and password required", Toast.LENGTH_SHORT).show();
+}
 
         }
 

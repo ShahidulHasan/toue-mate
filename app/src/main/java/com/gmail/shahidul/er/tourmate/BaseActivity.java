@@ -52,6 +52,8 @@ public class BaseActivity extends AppCompatActivity {
                 editor.remove("username");
                 editor.apply();
                 editor.commit();
+                Intent logOutIntent = new Intent(BaseActivity.this,LoginActivity.class);
+                startActivity(logOutIntent);
                 break;
         }
 
