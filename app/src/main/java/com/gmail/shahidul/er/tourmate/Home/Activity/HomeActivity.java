@@ -62,6 +62,7 @@ public class HomeActivity extends BaseActivity {
     public void eventMomentAction(View view) {
 
         Intent eventMomentIntent = new Intent(HomeActivity.this,MomentViewActivity.class);
+
         startActivity(eventMomentIntent);
     }
 

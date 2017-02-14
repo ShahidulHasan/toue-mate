@@ -39,10 +39,11 @@ public class EventExpenseActivity extends AppCompatActivity {
 
         //get user info from shared preference
 
-        SharedPreferences getEmail = getSharedPreferences("UserInfo",MODE_PRIVATE );
-        String email = getEmail.getString("email","");
+        SharedPreferences getData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+        String email = getData.getString("email","");
+        String eventId = getData.getString("eventIdEachMoment","");
 
-        mDatabase.child("eventExpenses").orderByChild("userEmail").equalTo(email).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("eventExpenses").orderByChild("eventId").equalTo(eventId).addValueEventListener(new ValueEventListener() {
 
             public void onDataChange(DataSnapshot dataSnapshot) {
                 eventExpenseListAdapter.notifyDataSetChanged();

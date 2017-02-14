@@ -43,7 +43,7 @@ public class EventMomentActivity extends AppCompatActivity {
     Button takeMomentBtn;
     ImageView imageView;
     Button saveMomentBtn;
-    Spinner eventList;
+
     String userEmail;
     int eventIdForEventMoment;
     String eventIdEachMoment;
@@ -58,17 +58,16 @@ public class EventMomentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_moment);
         Intent intent = getIntent();
 
-        if(intent.getStringExtra("status") == "fromEventDetail") {
+        if(intent.getStringExtra("status").equals("fromEventDetail")) {
 
             eventIdForEventMoment = intent.getIntExtra("eventIdForEventMoment",0);
             eventIdEachMoment = intent.getStringExtra("eventIdEachMoment");
 
             userEmail = intent.getStringExtra("userEmail");
-        } else{
+        } else {
             userEmail = intent.getStringExtra("email");
         }
-
-
+        Toast.makeText(this, eventIdEachMoment, Toast.LENGTH_SHORT).show();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         momentTitle = (EditText) findViewById(R.id.momentTitleET);
@@ -76,37 +75,6 @@ public class EventMomentActivity extends AppCompatActivity {
         takeMomentBtn = (Button) findViewById(R.id.takeMomentBtn);
         imageView = (ImageView) findViewById(R.id.eventMomentImageView);
         saveMomentBtn = (Button) findViewById(R.id.momentSave);
-        eventList = (Spinner) findViewById(R.id.eventListsSP);
-
-
-        mDatabase.child("events").addListenerForSingleValueEvent( new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                final List<String> eventSpinnerList = new ArrayList<String>();
-
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-
-                    String eventId = data.child("eventId").getValue(String.class);
-                    String eventName = data.child("location").getValue(String.class);
-
-                    eventSpinnerList.add(eventName);
-
-                    i++;
-                }
-
-                Spinner eventSpinner = eventList;
-                ArrayAdapter<String> EventSpinnerAdapter = new ArrayAdapter<String>(EventMomentActivity.this, android.R.layout.simple_spinner_item, eventSpinnerList);
-                EventSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                eventSpinner.setAdapter(EventSpinnerAdapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
     }
 
@@ -168,25 +136,26 @@ public class EventMomentActivity extends AppCompatActivity {
     public void saveMoment(View view) {
 
         if (i == 0){ i = 1;} else { i++; }
+
         SharedPreferences getData = getSharedPreferences("UserInfo",MODE_PRIVATE );
 
         String email = getData.getString("email","");
-        int eventIdEachEventMoment = getData.getInt("eventIdForEachEvent",0);
-        String eventIdEachMoment = getData.getString("eventIdEachMoment"," ");
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference("eventMoments");
 
         EventMoment eventMoment = new EventMoment();
 
         String eventMomentId = FirebaseDatabase.getInstance().getReference("eventMoments").push().getKey();
 
+        Toast.makeText(this, eventIdEachMoment, Toast.LENGTH_SHORT).show();
+
         eventMoment.setMomentId(eventMomentId);
-        eventMoment.setEventId(eventIdEachEventMoment);
         eventMoment.setEventIdEachMoment(eventIdEachMoment);
         eventMoment.setUserEmail(email);
         eventMoment.setMomentPhotoPath(currentMomentPhotoPath);
         eventMoment.setTitle(momentTitle.getText().toString());
         eventMoment.setDescription(momentDescription.getText().toString());
-        eventMoment.setEventIdEachMoment(eventList.getSelectedItem().toString());
 
         mDatabase.child(eventMomentId).setValue(eventMoment);
 

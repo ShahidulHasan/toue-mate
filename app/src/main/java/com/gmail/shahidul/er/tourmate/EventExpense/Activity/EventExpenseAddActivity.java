@@ -38,7 +38,6 @@ public class EventExpenseAddActivity extends AppCompatActivity {
     EditText expenseDateTV;
     EditText expenseCostTV;
     Button   expenseSaveBtn;
-    Spinner  expenseEventListSP;
     int i = 0;
     private DatabaseReference mDatabase;
     Calendar myCalendar = Calendar.getInstance();
@@ -54,7 +53,6 @@ public class EventExpenseAddActivity extends AppCompatActivity {
         expenseDateTV = (EditText) findViewById(R.id.expenseDate);
         expenseCostTV = (EditText) findViewById(R.id.expenseCost);
         expenseSaveBtn = (Button) findViewById(R.id.eventExpenseBtn);
-        expenseEventListSP = (Spinner) findViewById(R.id.eventExpenseListsSP);
 
         mDatabase.child("events").addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
@@ -71,12 +69,6 @@ public class EventExpenseAddActivity extends AppCompatActivity {
 
                     i++;
                 }
-
-                Spinner eventSpinner = expenseEventListSP;
-                ArrayAdapter<String> EventSpinnerAdapter = new ArrayAdapter<String>(EventExpenseAddActivity.this, android.R.layout.simple_spinner_item, eventSpinnerList);
-                EventSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                eventSpinner.setAdapter(EventSpinnerAdapter);
             }
 
             @Override
@@ -135,6 +127,7 @@ public class EventExpenseAddActivity extends AppCompatActivity {
         EventExpense eventExpense = new EventExpense();
 
         String email = saveUserData.getString("email","");
+        String eventIdEachMoment = saveUserData.getString("eventIdEachMoment"," ");
 
         String eventExpenseId = FirebaseDatabase.getInstance().getReference("eventExpenses").push().getKey();
 
@@ -143,13 +136,12 @@ public class EventExpenseAddActivity extends AppCompatActivity {
         eventExpense.setExpenseCause(expenseCause);
         eventExpense.setExpenseCost(Float.valueOf(expenseCost));
         eventExpense.setExpenseDate(expenseDate);
+        eventExpense.setEventId(eventIdEachMoment);
         eventExpense.setCreatedAt(new Date());
-
-
 
         mDatabase.child(eventExpenseId).setValue(eventExpense);
 
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), EventExpenseActivity.class);
         startActivity(intent);
     }
 }

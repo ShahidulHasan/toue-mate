@@ -2,6 +2,7 @@ package com.gmail.shahidul.er.tourmate.EventMoment.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gmail.shahidul.er.tourmate.EventMoment.Activity.EventMomentActivity;
+import com.gmail.shahidul.er.tourmate.EventMoment.Activity.MomentViewActivity;
 import com.gmail.shahidul.er.tourmate.EventMoment.Dao.EventMomentDao;
 import com.gmail.shahidul.er.tourmate.EventMoment.Model.EventMoment;
 import com.gmail.shahidul.er.tourmate.R;
@@ -62,8 +65,8 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
         eventMomentTitle.setText(eventMoment.getTitle());
         eventMomentDesc.setText(eventMoment.getDescription());
 
-        int targetW = 600;
-        int targetH = 150;
+        int targetW = 500;
+        int targetH = 100;
 
         BitmapFactory.Options options=new BitmapFactory.Options();
         options.inJustDecodeBounds=true;
@@ -90,12 +93,12 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
             @Override
             public void onClick(View v) {
 
-
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder
-                        .setMessage("Are uou want to delete")
+                        .setMessage("Are you want to delete this moment")
                         .setCancelable(false)
                         .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+
                             public void onClick(DialogInterface dialog,int id) {
 
                                 applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -111,7 +114,9 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
                                         Log.e("deleted", "onCancelled", databaseError.toException());
                                     }
                                 });
-
+                                Intent intent = new Intent(context, MomentViewActivity.class);
+//                                intent.putExtra("status","fromAdapter");
+                                context.startActivity(intent);
                             }
                         })
                         .setNegativeButton("No",new DialogInterface.OnClickListener() {

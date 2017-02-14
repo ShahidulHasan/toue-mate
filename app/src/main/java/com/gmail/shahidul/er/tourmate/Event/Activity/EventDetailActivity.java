@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
+import com.gmail.shahidul.er.tourmate.EventExpense.Activity.EventExpenseAddActivity;
 import com.gmail.shahidul.er.tourmate.EventMoment.Activity.EventMomentActivity;
 import com.gmail.shahidul.er.tourmate.R;
 
@@ -94,13 +95,37 @@ public class EventDetailActivity extends AppCompatActivity {
 
     public void expenseAction(View view) {
 
+        Intent momentIntent = new Intent(EventDetailActivity.this, EventExpenseAddActivity.class);
+
+        momentIntent.putExtra("eventIdForEventMoment",eventIdForEventMoment);
+
+        SharedPreferences putData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+
+        SharedPreferences.Editor editor = putData.edit();
+        editor.remove("eventIdForEachEvent");
+        editor.remove("eventIdEachMoment");
+        editor.apply();
+        editor.commit();
+
+        momentIntent.putExtra("eventIdEachMoment",eventIdEachMoment);
+        momentIntent.putExtra("userEmail",userEmail);
+        momentIntent.putExtra("status","fromEventDetail");
+        startActivity(momentIntent);
     }
 
     public void momentAction(View view) {
 
         Intent momentIntent = new Intent(EventDetailActivity.this, EventMomentActivity.class);
-        momentIntent.putExtra("eventIdForEventMoment",eventIdForEventMoment);
 
+        SharedPreferences putData = getSharedPreferences("UserInfo",MODE_PRIVATE );
+
+        SharedPreferences.Editor editor = putData.edit();
+        editor.remove("eventIdForEachEvent");
+        editor.remove("eventIdEachMoment");
+        editor.apply();
+        editor.commit();
+
+        momentIntent.putExtra("eventIdForEventMoment",eventIdForEventMoment);
         momentIntent.putExtra("eventIdEachMoment",eventIdEachMoment);
         momentIntent.putExtra("userEmail",userEmail);
         momentIntent.putExtra("status","fromEventDetail");

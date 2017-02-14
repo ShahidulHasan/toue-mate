@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.gmail.shahidul.er.tourmate.Event.Adapter.EventListAdapter;
 import com.gmail.shahidul.er.tourmate.Event.Model.Event;
@@ -57,7 +58,6 @@ public class EventListActivity extends AppCompatActivity {
             }
         });
 
-
         eventListAdapter = new EventListAdapter(this, eventArrayList);
         events.setAdapter(eventListAdapter);
 
@@ -72,7 +72,7 @@ public class EventListActivity extends AppCompatActivity {
                 String startDate = eventArrayList.get(position).getDate();
                 String endDate = eventArrayList.get(position).getEndDate();
                 String eventIdEachMoment = eventArrayList.get(position).getEventId();
-
+                Toast.makeText(EventListActivity.this, eventIdEachMoment, Toast.LENGTH_SHORT).show();
                 Event event = new Event();
                 event.setId(eventId);
                 event.setCost(eventCost);

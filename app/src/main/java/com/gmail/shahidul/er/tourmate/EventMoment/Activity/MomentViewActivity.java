@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.gmail.shahidul.er.tourmate.Event.Activity.EventListActivity;
 import com.gmail.shahidul.er.tourmate.EventMoment.Adapter.EventMomentListAdapter;
 import com.gmail.shahidul.er.tourmate.EventMoment.Model.EventMoment;
 import com.gmail.shahidul.er.tourmate.Home.Activity.HomeActivity;
@@ -41,11 +43,11 @@ public class MomentViewActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         eventMoments = (ListView) findViewById(R.id.eventMomentsList);
-//        events = (ListView) findViewById(events);
 
-//        eventArrayList = (ArrayList<Event>) getIntent().getSerializableExtra("eventArrayList");
+        SharedPreferences getEmail = getSharedPreferences("UserInfo",MODE_PRIVATE );
+        String email = getEmail.getString("email","");
 
-        mDatabase.child("eventMoments").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("eventMoments").orderByChild("userEmail").equalTo(email).addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 eventMomentListAdapter.notifyDataSetChanged();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
@@ -76,7 +78,10 @@ public class MomentViewActivity extends AppCompatActivity {
 
     public void addEventMomentAction(View view) {
 
-        Intent eventMomentIntent = new Intent(MomentViewActivity.this,EventMomentActivity.class);
-        startActivity(eventMomentIntent);
+        Intent intent = new Intent(MomentViewActivity.this, EventListActivity.class);
+        startActivity(intent);
+        /*Intent eventMomentIntent = new Intent(MomentViewActivity.this,EventMomentActivity.class);
+        eventMomentIntent.putExtra("status","fromMomentList");
+        startActivity(eventMomentIntent);*/
     }
 }
