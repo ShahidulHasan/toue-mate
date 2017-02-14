@@ -45,10 +45,7 @@ public class EventMomentListAdapter extends ArrayAdapter<EventMoment> {
         eventMomentArrayList = eventMoments;
         this.context = context;
 
-
     }
-
-
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
