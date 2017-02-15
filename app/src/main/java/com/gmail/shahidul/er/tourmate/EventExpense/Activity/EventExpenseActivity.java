@@ -46,7 +46,7 @@ public class EventExpenseActivity extends BaseActivity {
         SharedPreferences getData = getSharedPreferences("UserInfo",MODE_PRIVATE );
         String email = getData.getString("email","");
         String eventId = getData.getString("eventIdEachMoment","");
-        Toast.makeText(this, eventId, Toast.LENGTH_SHORT).show();
+
         mDatabase.child("eventExpenses").orderByChild("userEmail").equalTo(email).addValueEventListener(new ValueEventListener() {
 
             public void onDataChange(DataSnapshot dataSnapshot) {

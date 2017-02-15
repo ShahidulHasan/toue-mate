@@ -37,11 +37,6 @@ public class BaseActivity extends AppCompatActivity {
                 Intent nearByIntent = new Intent(BaseActivity.this,MapsActivity.class);
                 startActivity(nearByIntent);
                 break;
-            case R.id.weather_menu:
-                //Weather
-                Intent intent = new Intent(BaseActivity.this,LoginActivity.class);
-                startActivity(intent);
-                break;
             case R.id.logout_menu:
 
                 SharedPreferences saveUserData = getSharedPreferences("UserInfo",MODE_PRIVATE );

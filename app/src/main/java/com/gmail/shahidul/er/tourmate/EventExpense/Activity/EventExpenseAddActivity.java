@@ -60,7 +60,7 @@ public class EventExpenseAddActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        eventBudgetCost = intent.getIntExtra("eventBudgetCost",0);
+        eventBudgetCost = intent.getFloatExtra("eventBudgetCost",0);
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {

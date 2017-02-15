@@ -6,8 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/cast_expanded_controller_bg_gradient_light"
     tools:context="com.gmail.shahidul.er.tourmate.EventMoment.Activity.MomentViewActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/HeadingTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event Moment List"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

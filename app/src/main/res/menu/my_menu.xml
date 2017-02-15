@@ -13,13 +13,8 @@
         app:showAsAction="collapseActionView"
         android:orderInCategory="2"/>
 
-    <item android:title="Weather"
-        android:id="@+id/weather_menu"
-        app:showAsAction="collapseActionView"
-        android:orderInCategory="3"/>
-
     <item android:title="Logout"
         android:id="@+id/logout_menu"
         app:showAsAction="collapseActionView"
-        android:orderInCategory="4"/>
+        android:orderInCategory="3"/>
 </menu>
